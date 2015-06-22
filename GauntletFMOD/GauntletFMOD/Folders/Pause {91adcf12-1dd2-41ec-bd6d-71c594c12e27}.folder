@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.03.01">
+    <object class="Folder" id="{91adcf12-1dd2-41ec-bd6d-71c594c12e27}">
+        <property name="name">
+            <value>Pause</value>
+        </property>
+        <relationship name="folder">
+            <destination>{3954d5fe-8932-4541-a985-652ee25cb1b4}</destination>
+        </relationship>
+    </object>
+</objects>

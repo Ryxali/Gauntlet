@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.03.01">
+    <object class="Folder" id="{9bc4dab6-b9d4-440e-9d5c-f6ac351654a6}">
+        <property name="name">
+            <value>Perkmenu</value>
+        </property>
+        <relationship name="folder">
+            <destination>{3954d5fe-8932-4541-a985-652ee25cb1b4}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -23,7 +23,7 @@ bld/
 [Pp]ersonal/
 
 #ignore VS built temporary .dlls
-*UE4Editor-ProjectAPE-*.dll
+*UE4Editor-Gauntlet-*.dll
 
 # Roslyn cache directories
 *.ide/

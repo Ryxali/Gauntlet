@@ -1,12 +1,14 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
 #include "Gauntlet.h"
+#include "Engine.h"
+#include <math.h>
 #include "GauntletCharacter.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AGauntletCharacter
 
-AGauntletCharacter::AGauntletCharacter()
+AGauntletCharacter::AGauntletCharacter() : MouseInputCache(), LookDir(1.0f, 0.0f, 0.0f)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -62,6 +64,11 @@ void AGauntletCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 	//InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//InputComponent->BindAxis("LookUpRate", this, &AGauntletCharacter::LookUpAtRate);
 
+	InputComponent->BindAxis("Turn", this, &AGauntletCharacter::HorizontalInput);
+	InputComponent->BindAxis("TurnRate", this, &AGauntletCharacter::HorizontalInputRate);
+	InputComponent->BindAxis("LookUp", this, &AGauntletCharacter::VerticalInput);
+	InputComponent->BindAxis("LookUpRate", this, &AGauntletCharacter::VerticalInputRate);
+
 	// handle touch devices
 	InputComponent->BindTouch(IE_Pressed, this, &AGauntletCharacter::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &AGauntletCharacter::TouchStopped);
@@ -88,13 +95,13 @@ void AGauntletCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 void AGauntletCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+	//AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AGauntletCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	//AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AGauntletCharacter::MoveForward(float Value)
@@ -124,4 +131,43 @@ void AGauntletCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AGauntletCharacter::Tick(float Delta)
+{
+	LookDir += MouseInputCache;
+	LookDir.Z = 0;
+	if (LookDir.SizeSquared() > 0.0f)
+	{
+		LookDir = LookDir.GetUnsafeNormal();
+	}
+	else
+	{
+		LookDir = FVector(1.0f, 0.0f, 0.0f);
+	}
+	//FVector::DotProduct(FVector(1.0f, 0.0f, 0.0f), LookDir);
+	float euls = FMath::RadiansToDegrees(atan2(LookDir.Y, LookDir.X));//FVector::DotProduct(LookDir, FVector::ForwardVector);//LookDir.CosineAngle2D(FVector::ForwardVector);
+	FRotator r = FRotator::MakeFromEuler(FVector(0.0f, 0.0f, euls));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::SanitizeFloat(euls));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, r.ToString());
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, LookDir.ToString());
+	MouseInputCache = FVector::ZeroVector;
+	GetMesh()->RelativeRotation = r;
+}
+
+void AGauntletCharacter::VerticalInput(float Delta)
+{
+	MouseInputCache.Y += Delta;
+}
+void AGauntletCharacter::VerticalInputRate(float Rate)
+{
+	VerticalInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+void AGauntletCharacter::HorizontalInput(float Delta)
+{
+	MouseInputCache.X += Delta;
+}
+void AGauntletCharacter::HorizontalInputRate(float Rate)
+{
+	HorizontalInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }

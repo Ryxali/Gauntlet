@@ -25,6 +25,8 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+	
+	virtual void Tick(float Delta);
 
 protected:
 
@@ -52,6 +54,11 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	void VerticalInput(float Delta);
+	void VerticalInputRate(float Rate);
+	void HorizontalInput(float Delta);
+	void HorizontalInputRate(float Rate);
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
@@ -62,5 +69,9 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+private:
+	FVector LookDir;
+	FVector MouseInputCache;
 };
 

@@ -41,6 +41,7 @@ AGauntletCharacter::AGauntletCharacter() : MouseInputCache(), LookDir(1.0f, 0.0f
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+	AngleTweak = GetMesh()->RelativeRotation;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -50,8 +51,9 @@ void AGauntletCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 {
 	// Set up gameplay key bindings
 	check(InputComponent);
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	//InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	//InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AGauntletCharacter::InitTumble);
 
 	InputComponent->BindAxis("MoveForward", this, &AGauntletCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AGauntletCharacter::MoveRight);
@@ -147,7 +149,7 @@ void AGauntletCharacter::Tick(float Delta)
 	}
 	//FVector::DotProduct(FVector(1.0f, 0.0f, 0.0f), LookDir);
 	float euls = FMath::RadiansToDegrees(atan2(LookDir.Y, LookDir.X));//FVector::DotProduct(LookDir, FVector::ForwardVector);//LookDir.CosineAngle2D(FVector::ForwardVector);
-	FRotator r = FRotator::MakeFromEuler(FVector(0.0f, 0.0f, euls));
+	FRotator r = FRotator::MakeFromEuler(FVector(0.0f, 0.0f, euls + AngleTweak.Euler().Z));
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::SanitizeFloat(euls));
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, r.ToString());
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, LookDir.ToString());
@@ -170,4 +172,9 @@ void AGauntletCharacter::HorizontalInput(float Delta)
 void AGauntletCharacter::HorizontalInputRate(float Rate)
 {
 	HorizontalInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AGauntletCharacter::InitTumble() 
+{
+	Tumble(AngleTweak.RotateVector(GetMesh()->GetRightVector()));
 }

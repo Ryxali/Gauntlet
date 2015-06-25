@@ -59,6 +59,11 @@ protected:
 	void HorizontalInput(float Delta);
 	void HorizontalInputRate(float Rate);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Actions")
+	void Tumble(FVector dir);
+	void InitTumble();
+
+	FRotator AngleTweak;
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;

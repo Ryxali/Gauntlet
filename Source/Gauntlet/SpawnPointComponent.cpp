@@ -5,6 +5,7 @@
 #include "ParticleDefinitions.h"
 #include "Engine.h"
 #include "math.h"
+#include "GauntletCharacter.h"
 
 // Sets default values for this component's properties
 USpawnPointComponent::USpawnPointComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -71,6 +72,11 @@ void USpawnPointComponent::OnRegister()
 
 void USpawnPointComponent::Spawn()
 {
-	FMath::RandRange(0, Types.Num()-1);
-	UWorld::SpawnActor<Types[0]>();
+	//FMath::RandRange(0, Types.Num()-1);
+	//UWorld::SpawnActor<Types[0]>();
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("This is an on screen message!"));
+	GetWorld()->SpawnActor(Types[0]->StaticClass());
+
+	//UWorld::SpawnActor<AActor>();
+	//UWorld::SpawnActor < Types[0]->StaticClass()>();
 }

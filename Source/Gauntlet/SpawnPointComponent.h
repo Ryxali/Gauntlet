@@ -6,7 +6,7 @@
 #include "SpawnPointComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), abstract, Blueprintable )
 class GAUNTLET_API USpawnPointComponent : public USceneComponent
 {
 	GENERATED_BODY()
@@ -27,7 +27,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn Types")
 	TArray<TSubclassOf<class AActor>> Types;
 
-	UFUNCTION(BlueprintCallable, Category = "Spawn")
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spawn")
 	void Spawn();
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn Types")
 	

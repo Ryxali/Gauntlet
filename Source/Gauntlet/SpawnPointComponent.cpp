@@ -70,7 +70,7 @@ void USpawnPointComponent::OnRegister()
 	Super::OnRegister();
 }
 
-void USpawnPointComponent::Spawn()
+/*void USpawnPointComponent::Spawn()
 {
 	//FMath::RandRange(0, Types.Num()-1);
 	//UWorld::SpawnActor<Types[0]>();
@@ -79,4 +79,4 @@ void USpawnPointComponent::Spawn()
 
 	//UWorld::SpawnActor<AActor>();
 	//UWorld::SpawnActor < Types[0]->StaticClass()>();
-}
+}*/

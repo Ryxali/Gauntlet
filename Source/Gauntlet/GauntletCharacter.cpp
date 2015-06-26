@@ -176,5 +176,6 @@ void AGauntletCharacter::HorizontalInputRate(float Rate)
 
 void AGauntletCharacter::InitTumble() 
 {
-	Tumble(AngleTweak.RotateVector(GetMesh()->GetRightVector()));
+	//AngleTweak.RotateVector(GetMesh()->GetRightVector())
+	Tumble(GetLastMovementInputVector());
 }

@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////
 // AGauntletCharacter
 
-AGauntletCharacter::AGauntletCharacter() : MouseInputCache(), LookDir(1.0f, 0.0f, 0.0f)
+AGauntletCharacter::AGauntletCharacter() : MouseInputCache(), LookDir(1.0f, 0.0f, 0.0f), TumbleDir(FVector::ZeroVector)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -137,6 +137,10 @@ void AGauntletCharacter::MoveRight(float Value)
 
 void AGauntletCharacter::Tick(float Delta)
 {
+	FVector f = GetLastMovementInputVector();
+	if (!f.IsNearlyZero()){
+		TumbleDir = f;
+	}
 	LookDir += MouseInputCache;
 	LookDir.Z = 0;
 	if (LookDir.SizeSquared() > 0.0f)
@@ -177,5 +181,5 @@ void AGauntletCharacter::HorizontalInputRate(float Rate)
 void AGauntletCharacter::InitTumble() 
 {
 	//AngleTweak.RotateVector(GetMesh()->GetRightVector())
-	Tumble(GetLastMovementInputVector());
+	Tumble(TumbleDir);
 }

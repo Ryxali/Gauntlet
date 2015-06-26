@@ -78,5 +78,6 @@ public:
 private:
 	FVector LookDir;
 	FVector MouseInputCache;
+	FVector TumbleDir;
 };
 

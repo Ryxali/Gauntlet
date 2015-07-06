@@ -3,7 +3,7 @@
 #include "GameFramework/Character.h"
 #include "GauntletCharacter.generated.h"
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class AGauntletCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -19,14 +19,14 @@ public:
 	AGauntletCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseTurnRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseLookUpRate;
-	
-	virtual void Tick(float Delta);
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseLookUpRate;
+
+	void Tick(float Delta) override;
 
 protected:
 
@@ -36,16 +36,16 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-	/** 
-	 * Called via input to turn at a given rate. 
-	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
-	 */
+	/**
+	* Called via input to turn at a given rate.
+	* @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
+	*/
 	void TurnAtRate(float Rate);
 
 	/**
-	 * Called via input to turn look up/down at a given rate. 
-	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
-	 */
+	* Called via input to turn look up/down at a given rate.
+	* @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
+	*/
 	void LookUpAtRate(float Rate);
 
 	/** Handler for when a touch input begins. */
@@ -54,16 +54,6 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
-	void VerticalInput(float Delta);
-	void VerticalInputRate(float Rate);
-	void HorizontalInput(float Delta);
-	void HorizontalInputRate(float Rate);
-
-	UFUNCTION(BlueprintImplementableEvent, Category = "Actions")
-	void Tumble(FVector dir);
-	void InitTumble();
-
-	FRotator AngleTweak;
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
@@ -74,10 +64,5 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-
-private:
-	FVector LookDir;
-	FVector MouseInputCache;
-	FVector TumbleDir;
 };
 

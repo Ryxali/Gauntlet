@@ -50,8 +50,8 @@ void AGauntletCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 {
 	// Set up gameplay key bindings
 	check(InputComponent);
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AGauntletCharacter::Blink);
+	//InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	InputComponent->BindAxis("MoveForward", this, &AGauntletCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AGauntletCharacter::MoveRight);
@@ -154,4 +154,17 @@ void AGauntletCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AGauntletCharacter::Blink()
+{
+	static float BlinkLenght = 500.0f;
+
+	FRotator Rotation = GetActorRotation();
+	FVector Location = GetActorLocation();
+	FHitResult Hit;
+
+	Rotation.Normalize();
+	
+	SetActorLocation(Location + Rotation.Vector() * BlinkLenght, true, &Hit);
 }

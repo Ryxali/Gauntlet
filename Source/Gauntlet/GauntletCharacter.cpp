@@ -57,7 +57,7 @@ void AGauntletCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 {
 	// Set up gameplay key bindings
 	check(InputComponent);
-	InputComponent->BindAction("Jump", IE_Pressed, this, &AGauntletCharacter::Blink);
+	//InputComponent->BindAction("Jump", IE_Pressed, this, &AGauntletCharacter::Blink);
 	//InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	InputComponent->BindAxis("MoveForward", this, &AGauntletCharacter::MoveForward);

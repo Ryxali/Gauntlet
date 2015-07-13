@@ -41,6 +41,13 @@ AGauntletCharacter::AGauntletCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+	//BlinkCollider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("BlinkCollider"));
+	//BlinkCollider->InitCapsuleSize(42.f, 96.0f);
+
+
+	BlinkCollider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("BlinkCollider"));
+	BlinkCollider->InitCapsuleSize(42.0f, 96.0f);
+	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -161,10 +168,19 @@ void AGauntletCharacter::Blink()
 	static float BlinkLenght = 500.0f;
 
 	FRotator Rotation = GetActorRotation();
-	FVector Location = GetActorLocation();
-	FHitResult Hit;
-
 	Rotation.Normalize();
+	FVector Location = GetActorLocation();
+	FHitResult TestHit;
+
+	BlinkCollider->SetWorldLocation(Location + Rotation.Vector() * BlinkLenght, true, &TestHit);
+
+	TArray<AActor*> Actors;
+	BlinkCollider->GetOverlappingActors(Actors);
+
 	
-	SetActorLocation(Location + Rotation.Vector() * BlinkLenght, true, &Hit);
+	if (Actors.Num() <= 0)
+	{
+		FHitResult MoveHit;
+		SetActorLocation(Location + Rotation.Vector() * BlinkLenght, false, &MoveHit);
+	}
 }

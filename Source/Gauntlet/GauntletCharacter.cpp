@@ -84,23 +84,20 @@ void AGauntletCharacter::Tick(float Delta)
 	if (Controller != NULL)
 	{
 		APlayerController* PlayerController = (APlayerController*) GetWorld()->GetFirstPlayerController();
+		
+		FVector MouseLocation, MouseDirection;
+		PlayerController->DeprojectMousePositionToWorld(MouseLocation, MouseDirection);
 
-		// Raycast from the mouse to get a Hit location.
-		FHitResult Hit;
-		PlayerController->GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+		// Calculate the final rotation.
+		FRotator ActorRotation		= GetActorRotation();
+		FVector	 ActorLocation		= GetActorLocation() - (FVector::UpVector) * GetCapsuleComponent()->GetScaledCapsuleHalfHeight(); // Make sure the pivot point is at the actors feet.
 
-		// Find out the direction vector between the actor and the mouse. 
-		FVector Direction = Hit.Location - GetActorLocation();
-		Direction = FVector(Direction.X, Direction.Y, 0.0f);
+		FVector  IntersectionPoint	= FMath::LinePlaneIntersection(MouseLocation, MouseLocation + MouseDirection, ActorLocation, FVector(0.0f, 0.0f, 1.0f));
+		FRotator LookAtRotation		= FRotationMatrix::MakeFromX(IntersectionPoint - ActorLocation).Rotator();
 
-		FRotator Rotation = FRotationMatrix::MakeFromX(Direction).Rotator();
+		FRotator FinalRotation		= FRotator(ActorRotation.Pitch, LookAtRotation.Yaw, ActorRotation.Roll);
 
-
-
-		FRotator ActorRotation = GetActorRotation();
-		FRotator NewActorRotation = FRotator(ActorRotation.Pitch, Rotation.Yaw, ActorRotation.Roll);
-
-		SetActorRotation(NewActorRotation);
+		SetActorRotation(FinalRotation);
 	}
 }
 

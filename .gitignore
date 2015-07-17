@@ -25,6 +25,7 @@ bld/
 #ignore VS built temporary .dlls
 *UE4Editor-Gauntlet-*.dll
 *UE4Editor-FMODStudio-*.dll
+*UE4Editor-FMODStudioEditor-*.dll
 
 # Roslyn cache directories
 *.ide/

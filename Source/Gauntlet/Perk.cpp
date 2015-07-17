@@ -11,3 +11,10 @@ UPerk::UPerk()
 	ComboPeriod = 0;
 }
 
+UPerk::UPerk(const class FPostConstructInitializeProperties& PCIP)
+	: Super(PCIP) {
+	RequiredCombo = 0;
+	Repeating = false;
+	ComboPeriod = 0;
+}
+

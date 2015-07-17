@@ -11,7 +11,7 @@
 UCLASS(BlueprintType, Blueprintable, config = Engine)
 class GAUNTLET_API UPerk : public UObject
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 public:
 	UPerk();
 

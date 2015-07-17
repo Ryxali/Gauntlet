@@ -26,6 +26,7 @@ bld/
 *UE4Editor-Gauntlet-*.dll
 *UE4Editor-FMODStudio-*.dll
 *UE4Editor-FMODStudioEditor-*.dll
+*UE4Editor-FMODStudioOculus-*.dll
 
 # Roslyn cache directories
 *.ide/

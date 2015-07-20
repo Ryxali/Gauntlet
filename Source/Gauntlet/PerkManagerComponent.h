@@ -10,23 +10,6 @@ class AActor;
 
 
 
-struct PerkNode
-{
-	UPerk* Self;
-	PerkNode* Next;
-
-	inline PerkNode(UPerk* Self)
-	{
-		this->Self = Self;
-		this->Next = NULL;
-	}
-	
-
-	inline bool HasNext() const
-	{
-		return Next != NULL;
-	}
-};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GAUNTLET_API UPerkManagerComponent : public UActorComponent
@@ -46,20 +29,25 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+	// Increment the Combo counter, applying any perks relevant for that combo value
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void IncrementCombo(AActor* EnemyHit);
 
+	// Reset the combo counter to 0, resetting any perks in the process
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void ResetCombo();
 
+	// Add a new perk, allowing it to be applied as the player progresses through combos
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void AddPerk(TSubclassOf<UPerk> Perk);
+
+	// Get the current combo count
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Combo")
+	int32 GetComboCount() const;
 
 private:
 	UPROPERTY()
 	int32 InternalComboCount;
 	UPROPERTY()
 	TArray<UPerk*> Perks;
-	UPROPERTY()
-	UPerk* TPerk;
 };

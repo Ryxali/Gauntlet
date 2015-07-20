@@ -36,6 +36,7 @@ class GAUNTLET_API UPerkManagerComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UPerkManagerComponent();
+	~UPerkManagerComponent();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -59,4 +60,6 @@ private:
 	int32 InternalComboCount;
 	UPROPERTY()
 	TArray<UPerk*> Perks;
+	UPROPERTY()
+	UPerk* TPerk;
 };

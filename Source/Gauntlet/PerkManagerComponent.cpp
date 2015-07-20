@@ -50,7 +50,7 @@ void UPerkManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 	// ...not
 }
 
-void UPerkManagerComponent::IncrementCombo()
+void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 {
 	InternalComboCount++;
 	
@@ -70,14 +70,14 @@ void UPerkManagerComponent::IncrementCombo()
 		// ((
 		if ((*It)->RequiredCombo == InternalComboCount)
 		{
-			
+			(*It)->Apply(EnemyHit);
 		}
 		if (
 			(*It)->Repeating
 			&& (InternalComboCount >= (*It)->RequiredCombo)
 			&& ((*It)->ComboPeriod == 0 || FMath::Floor(FMath::Fmod(InternalComboCount, (*It)->ComboPeriod)) == 0)) // && (InternalComboCount % ((*It)->ComboPeriod))
 		{
-			(*It)->Apply();
+			(*It)->Apply(EnemyHit);
 		}
 
 	}

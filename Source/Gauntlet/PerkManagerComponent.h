@@ -3,9 +3,11 @@
 #pragma once
 //#include "Perk.h"
 class UPerk;
+class AActor;
 
 #include "Components/ActorComponent.h"
 #include "PerkManagerComponent.generated.h"
+
 
 
 struct PerkNode
@@ -44,7 +46,7 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Combo")
-	void IncrementCombo();
+	void IncrementCombo(AActor* EnemyHit);
 
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void ResetCombo();

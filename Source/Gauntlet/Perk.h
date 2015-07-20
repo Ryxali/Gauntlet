@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+class AActor;
 #include "Object.h"
 #include "Perk.generated.h"
 
@@ -16,7 +16,7 @@ public:
 	UPerk();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk")
-	void Apply();
+	void Apply(AActor* EnemyHit);
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Perk")
 	/** How much combo is required until this perk is applied */

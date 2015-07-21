@@ -16,7 +16,7 @@ public:
 	UPerk();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk")
-	void Apply(AActor* EnemyHit);
+	void Apply(AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player);
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Perk")
 	/** How much combo is required until this perk is applied */

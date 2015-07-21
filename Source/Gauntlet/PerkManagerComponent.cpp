@@ -47,13 +47,14 @@ void UPerkManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 
 void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 {
+	// AGameState* GameState, AGameMode* GameMode, ACharacter* Player
 	InternalComboCount++;
 	for (auto It(Perks.CreateIterator()); It; It++) {
 		if (!(*It)->IsValidLowLevel()) continue;
 
 		if ((*It)->RequiredCombo == InternalComboCount)
 		{
-			(*It)->Apply(EnemyHit);
+			(*It)->Apply(EnemyHit, UGameplayStatics::GetGameMode(this), UGameplayStatics::GetGameState(this), UGameplayStatics::GetPlayerCharacter(this, 0));
 			continue;
 		}
 
@@ -61,7 +62,7 @@ void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 			&& (InternalComboCount >= (*It)->RequiredCombo)
 			&& ((*It)->ComboPeriod == 0 || FMath::Floor(FMath::Fmod(InternalComboCount, (*It)->ComboPeriod)) == 0)) // && (InternalComboCount % ((*It)->ComboPeriod))
 		{
-			(*It)->Apply(EnemyHit);
+			(*It)->Apply(EnemyHit, UGameplayStatics::GetGameMode(this), UGameplayStatics::GetGameState(this), UGameplayStatics::GetPlayerCharacter(this, 0));
 		}
 
 	}

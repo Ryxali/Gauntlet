@@ -2,7 +2,7 @@
 
 #include "Gauntlet.h"
 #include "BuffManagerComponent.h"
-
+#include "Engine.h"
 
 // Sets default values for this component's properties
 UBuffManagerComponent::UBuffManagerComponent()
@@ -50,26 +50,39 @@ void UBuffManagerComponent::AddValue(FName Name, float Value, const TArray<TEnum
 void UBuffManagerComponent::SetValue(FName Name, float Value)
 {
 	FBuffableValue* Temp = Values.Find(Name);
-	Temp->Value = Value;
+	if (Temp != nullptr)
+	{
+		Temp->Value = Value;
+	}
+	
 }
 
 float UBuffManagerComponent::GetValue(FName Name)
 {
-	float Value = Values.Find(Name)->Value;
-	EBuffAppliesTo Flags = Values.Find(Name)->AppliesTo_Flags;
-	for (UBuff* Buff : Buffs)
+	FBuffableValue* Temp = Values.Find(Name);
+	if (Temp != nullptr)
 	{
-		if (HasFlag(Buff, Flags)) {
-			Value = Buff->ApplyTo(Value);
+		float Value = Temp->Value;
+		EBuffAppliesTo Flags = Temp->AppliesTo_Flags;
+	
+		for (UBuff* Buff : Buffs)
+		{
+			if (HasFlag(Buff, Flags)) {
+				Value = Buff->ApplyTo(Value);
+			}
 		}
+		return Value;
 	}
-	return Value;
+	return 0.f;
 }
 
 void UBuffManagerComponent::SetFlags(FName Name, const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags)
 {
 	FBuffableValue* Temp = Values.Find(Name);
-	Temp->AppliesTo_Flags = ToSingleEnum(Flags);
+	if (Temp != nullptr)
+	{
+		Temp->AppliesTo_Flags = ToSingleEnum(Flags);
+	}
 }
 
 EBuffAppliesTo UBuffManagerComponent::ToSingleEnum(const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags) const
@@ -84,5 +97,6 @@ EBuffAppliesTo UBuffManagerComponent::ToSingleEnum(const TArray<TEnumAsByte<EBuf
 
 bool UBuffManagerComponent::HasFlag(const UBuff* Buff, const EBuffAppliesTo& Flag) const
 {
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, FString::Printf(TEXT("HATH FLAGGETH %i"), (uint8)Buff->AppliesTo[0]));
 	return (Buff->AppliesTo_Flags & Flag) != EBuffAppliesTo::NONE;
 }

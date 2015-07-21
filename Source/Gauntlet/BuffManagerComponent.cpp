@@ -84,5 +84,5 @@ EBuffAppliesTo UBuffManagerComponent::ToSingleEnum(const TArray<TEnumAsByte<EBuf
 
 bool UBuffManagerComponent::HasFlag(const UBuff* Buff, const EBuffAppliesTo& Flag) const
 {
-	return (Buff->AppliesTo_Flags & Flag) == Flag;
+	return (Buff->AppliesTo_Flags & Flag) != EBuffAppliesTo::NONE;
 }

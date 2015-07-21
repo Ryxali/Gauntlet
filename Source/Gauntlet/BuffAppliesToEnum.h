@@ -6,7 +6,7 @@ UENUM(BlueprintType)
 enum class EBuffAppliesTo : uint8 {
 	NONE = 0x0	UMETA(Hidden),
 	GOLD_DROP_QUANTITY = 0x1	UMETA(DisplayName = "Gold Drop Quantity"),
-
+	ATTACK_SPEED = 0x2	UMETA(DisplayName = "Attack Speed"),
 	ALL = 0x3	UMETA(Hidden)
 };
 

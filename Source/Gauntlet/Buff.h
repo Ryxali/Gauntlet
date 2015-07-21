@@ -21,7 +21,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Buff")
 	float ApplyTo(float value);
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Buff")
 	TArray<EBuffAppliesTo> AppliesTo;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Buff")

@@ -25,7 +25,12 @@ void UBuff::PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChange
 
 void UBuff::Initialize()
 {
-	EndTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) + LifeTime;
+	//EndTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) + LifeTime;
+}
+
+void UBuff::StartDecay(float StartTime)
+{
+	EndTime = StartTime + LifeTime;
 }
 
 float UBuff::ApplyTo_Implementation(float value)

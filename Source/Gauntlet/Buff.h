@@ -22,8 +22,12 @@ public:
 	float ApplyTo(float value);
 
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
-
+	
+	UFUNCTION()
 	virtual void Initialize();
+
+	UFUNCTION()
+	void StartDecay(float StartTime);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	TArray<EBuffAppliesTo> AppliesTo;

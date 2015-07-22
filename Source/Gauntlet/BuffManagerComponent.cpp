@@ -49,7 +49,16 @@ void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 {
 	UBuff* p = NewObject<UBuff>((UObject*)GetTransientPackage(), Buff);
-	//p->Initialize();
+	p->Initialize();
+	if (GetWorld()->IsValidLowLevel())
+	{
+		//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Added Buff!"));
+		p->StartDecay(UGameplayStatics::GetRealTimeSeconds(GetWorld()));
+	}
+	else
+	{
+		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Cannot get world time for buff!"));
+	}
 	Buffs.Add(p);
 }
 

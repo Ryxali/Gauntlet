@@ -36,8 +36,13 @@ public:
 	EBuffAppliesTo AppliesTo_Flags;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
+	bool IsUnique;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	float LifeTime;
 
 	UPROPERTY()
 	float EndTime;
+
+	
 };

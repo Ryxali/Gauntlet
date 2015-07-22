@@ -23,9 +23,17 @@ public:
 
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Buff")
+	virtual void Initialize();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	TArray<EBuffAppliesTo> AppliesTo;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Buff")
 	EBuffAppliesTo AppliesTo_Flags;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
+	float LifeTime;
+
+	UPROPERTY()
+	float EndTime;
 };

@@ -50,6 +50,7 @@ private:
 	UPROPERTY()
 	TArray<UBuff*> Buffs;
 
+	UFUNCTION()
 	EBuffAppliesTo ToSingleEnum(const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags) const;
 
 	UFUNCTION()

@@ -30,7 +30,17 @@ void UBuffManagerComponent::BeginPlay()
 void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
+	/*for (auto It(Buffs.CreateIterator()); It; It++)
+	{
+		if (!(*It)->IsValidLowLevel()) continue;
+		float SecondsPassed = UGameplayStatics::GetRealTimeSeconds(GetWorld());
+		if ((*It)->EndTime < SecondsPassed)
+		{
+			(*It)->ConditionalBeginDestroy();
+			Buffs.RemoveAt(It.GetIndex());
+			It--;
+		}
+	}*/
 	// ...
 }
 
@@ -39,6 +49,7 @@ void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 {
 	UBuff* p = NewObject<UBuff>((UObject*)GetTransientPackage(), Buff);
+	//p->Initialize();
 	Buffs.Add(p);
 }
 
@@ -97,6 +108,5 @@ EBuffAppliesTo UBuffManagerComponent::ToSingleEnum(const TArray<TEnumAsByte<EBuf
 
 bool UBuffManagerComponent::HasFlag(const UBuff* Buff, const EBuffAppliesTo& Flag) const
 {
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, FString::Printf(TEXT("HATH FLAGGETH %i"), (uint8)Buff->AppliesTo[0]));
 	return (Buff->AppliesTo_Flags & Flag) != EBuffAppliesTo::NONE;
 }

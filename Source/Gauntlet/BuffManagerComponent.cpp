@@ -30,17 +30,18 @@ void UBuffManagerComponent::BeginPlay()
 void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-	/*for (auto It(Buffs.CreateIterator()); It; It++)
+	for (auto It(Buffs.CreateIterator()); It; It++)
 	{
 		if (!(*It)->IsValidLowLevel()) continue;
 		float SecondsPassed = UGameplayStatics::GetRealTimeSeconds(GetWorld());
 		if ((*It)->EndTime < SecondsPassed)
 		{
+			//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Killed Buff!"));
 			(*It)->ConditionalBeginDestroy();
 			Buffs.RemoveAt(It.GetIndex());
 			It--;
 		}
-	}*/
+	}
 	// ...
 }
 

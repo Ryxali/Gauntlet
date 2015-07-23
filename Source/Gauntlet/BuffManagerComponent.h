@@ -34,25 +34,36 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+	// Adds a new buff to this component and by extension - the actor it's a component of
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void AddBuff(TSubclassOf<UBuff> Buff);
 
+	// Adds a new buffable value to this component
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void AddValue(FName Name, float Value, const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags);
+	// Set a value in this component.
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void SetValue(FName Name, float Value);
+	// Set the flags a value in this component applies to
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void SetFlags(FName Name, const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags);
 
+	// Get a value in this component, applying any relevant buffs to it in the process
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Buff")
+	float GetValue(FName Name) const;
+
+	// Clear this components of all clearable buffs
 	UFUNCTION(BlueprintCallable, Category = "Buff")
-	float GetValue(FName Name);
+	void CleanseBuffs();
 private:
 	UPROPERTY()
 	TArray<UBuff*> Buffs;
 
+	// Helper function to turn an array of flags into a single value
 	UFUNCTION()
 	EBuffAppliesTo ToSingleEnum(const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags) const;
 
+	// Helper function to determine if the buff has any of the provided flags
 	UFUNCTION()
 	bool HasFlag(const UBuff* Buff, const EBuffAppliesTo& Flag) const;
 

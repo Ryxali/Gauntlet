@@ -97,9 +97,9 @@ void UBuffManagerComponent::SetValue(FName Name, float Value)
 	
 }
 
-float UBuffManagerComponent::GetValue(FName Name)
+float UBuffManagerComponent::GetValue(FName Name) const
 {
-	FBuffableValue* Temp = Values.Find(Name);
+	const FBuffableValue* Temp = Values.Find(Name);
 	if (Temp != nullptr)
 	{
 		float Value = Temp->Value;
@@ -122,6 +122,17 @@ void UBuffManagerComponent::SetFlags(FName Name, const TArray<TEnumAsByte<EBuffA
 	if (Temp != nullptr)
 	{
 		Temp->AppliesTo_Flags = ToSingleEnum(Flags);
+	}
+}
+
+void UBuffManagerComponent::CleanseBuffs()
+{
+	for (auto It(Buffs.CreateIterator()); It; It++)
+	{
+		if (!(*It)->IsValidLowLevel() && !(*It)->CanBeCleansed) continue;
+		(*It)->ConditionalBeginDestroy();
+		Buffs.RemoveAt(It.GetIndex());
+		It--;
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "BuffAppliesToEnum.h"
 #include "Components/ActorComponent.h"
 #include "BuffManagerComponent.generated.h"
+
 USTRUCT()
 struct FBuffableValue
 {
@@ -19,7 +20,7 @@ struct FBuffableValue
 	}
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Buff), meta=(BlueprintSpawnableComponent) )
 class GAUNTLET_API UBuffManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()

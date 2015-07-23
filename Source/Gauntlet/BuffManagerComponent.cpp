@@ -53,16 +53,12 @@ void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 	{
 		if (Tmp->GetClass() == Buff)
 		{
+			if (Tmp->RefreshDuplicatesOnAdd && GetWorld()->IsValidLowLevel())
+			{
+				Tmp->StartDecay(UGameplayStatics::GetRealTimeSeconds(GetWorld()));
+			}
 			if (Tmp->IsUnique)
 			{
-				if (GetWorld()->IsValidLowLevel())
-				{
-					Tmp->StartDecay(UGameplayStatics::GetRealTimeSeconds(GetWorld()));
-				}
-				else
-				{
-					if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Cannot get world time for buff!"));
-				}
 				return;
 			}
 		}

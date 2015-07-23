@@ -37,10 +37,16 @@ public:
 
 	/*
 		Whether multiple buffs of this class can be applied to the same actor.
-		If true, applying a new buff will instead cause the decay to restart.
 	*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	bool IsUnique;
+
+	/*
+		Whether we should refresh the life time of buffs of this time
+		already present on the actor when adding a new one.
+	*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
+	bool RefreshDuplicatesOnAdd;
 
 	// Whether this buff should be cleansed by managers.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")

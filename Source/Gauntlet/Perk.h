@@ -3,6 +3,7 @@
 #pragma once
 class AActor;
 #include "Object.h"
+
 #include "Perk.generated.h"
 
 /**
@@ -19,6 +20,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk")
 	void Apply(AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player);
 
+	/*UFUNCTION(BlueprintCallable, Category = "Perk")
+	void SpawnActor(); //AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player
+	*/
+	//ULevel* GetLevel() const;
+	virtual UWorld* GetWorld() const override;
+
+	void SetWorld(UWorld* World);
+
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Perk")
 	/** How much combo is required until this perk is applied */
 	int32 RequiredCombo;
@@ -31,5 +40,5 @@ public:
 	/** If we're repeating, how many combos to wait until repeating again */
 	int32 ComboPeriod;
 private:
-	
+	UWorld* World;
 };

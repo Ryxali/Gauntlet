@@ -28,6 +28,7 @@ public:
 	UFUNCTION()
 	void StartDecay(float StartTime);
 
+	// The varius kinds of values this buff applies to.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	TArray<EBuffAppliesTo> AppliesTo;
 

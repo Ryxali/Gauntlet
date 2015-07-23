@@ -15,6 +15,7 @@ class GAUNTLET_API UPerk : public UObject
 public:
 	UPerk();
 
+	// Called when the effects of this perk should be executed
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk")
 	void Apply(AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player);
 

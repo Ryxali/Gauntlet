@@ -16,16 +16,15 @@ public:
 	UBuff();
 	~UBuff();
 
-	//virtual void PostInitProperties() override;
-
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Buff")
 	float ApplyTo(float value);
 
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
-	
-	UFUNCTION()
-	virtual void Initialize();
 
+	/* 
+		Orders the buff to calculate it's end time, allowing any manager to know
+		when it should be destroyed.
+	*/
 	UFUNCTION()
 	void StartDecay(float StartTime);
 
@@ -35,12 +34,18 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Buff")
 	EBuffAppliesTo AppliesTo_Flags;
 
+	/*
+		Whether multiple buffs of this class can be applied to the same actor.
+		If true, applying a new buff will instead cause the decay to restart.
+	*/
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	bool IsUnique;
 
+	// Whether this buff should be cleansed by managers.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	bool CanBeCleansed;
 
+	// How long time (in seconds) this buff should be active until destroyed.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	float LifeTime;
 

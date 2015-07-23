@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+/*
+	Defines the various flags used to identifiy buffs.
+*/
 UENUM(BlueprintType)
 enum class EBuffAppliesTo : uint8 {
 	NONE = 0x0	UMETA(Hidden),

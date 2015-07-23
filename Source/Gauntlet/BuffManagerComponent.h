@@ -20,6 +20,11 @@ struct FBuffableValue
 	}
 };
 
+/*
+	The Buff Manager Component is responsible for storing
+	buffs and values, applying the buff modification to values
+	upon retreival, and clearing buffs when appropriate.
+*/
 UCLASS( ClassGroup=(Buff), meta=(BlueprintSpawnableComponent) )
 class GAUNTLET_API UBuffManagerComponent : public UActorComponent
 {

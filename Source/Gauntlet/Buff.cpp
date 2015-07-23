@@ -5,13 +5,11 @@
 #include "Engine.h"
 UBuff::UBuff()
 {
-	//EndTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) + LifeTime;
 	CanBeCleansed = true;
 }
 
 UBuff::UBuff(const class FPostConstructInitializeProperties& PCIP)
 : Super(PCIP) {
-	//EndTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) + LifeTime;
 	CanBeCleansed = true;
 }
 
@@ -24,11 +22,6 @@ void UBuff::PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChange
 		AppliesTo_Flags = (EBuffAppliesTo)((uint8)AppliesTo_Flags | (uint8)(*It));
 	}
 	
-}
-
-void UBuff::Initialize()
-{
-	//EndTime = UGameplayStatics::GetRealTimeSeconds(GetWorld()) + LifeTime;
 }
 
 void UBuff::StartDecay(float StartTime)

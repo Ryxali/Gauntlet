@@ -47,7 +47,6 @@ void UPerkManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 
 void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 {
-	// AGameState* GameState, AGameMode* GameMode, ACharacter* Player
 	InternalComboCount++;
 	for (auto It(Perks.CreateIterator()); It; It++) {
 		if (!(*It)->IsValidLowLevel()) continue;

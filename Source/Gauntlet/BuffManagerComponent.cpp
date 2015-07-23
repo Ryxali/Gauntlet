@@ -69,8 +69,6 @@ void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 	}
 
 	UBuff* p = NewObject<UBuff>((UObject*)GetTransientPackage(), Buff);
-	
-	p->Initialize();
 	if (GetWorld()->IsValidLowLevel())
 	{ 
 		p->StartDecay(UGameplayStatics::GetRealTimeSeconds(GetWorld()));

@@ -17,7 +17,7 @@ public:
 	~UBuff();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Buff")
-	float ApplyTo(float value);
+	float ApplyTo(float BaseValue, float Value);
 
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
 

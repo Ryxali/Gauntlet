@@ -103,7 +103,7 @@ float UBuffManagerComponent::GetValue(FName Name) const
 		for (UBuff* Buff : Buffs)
 		{
 			if (HasFlag(Buff, Flags)) {
-				Value = Buff->ApplyTo(Value);
+				Value = Buff->ApplyTo(Temp->Value, Value);
 			}
 		}
 		return Value;

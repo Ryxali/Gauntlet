@@ -29,10 +29,10 @@ void UBuff::StartDecay(float StartTime)
 	EndTime = StartTime + LifeTime;
 }
 
-float UBuff::ApplyTo_Implementation(float value)
+float UBuff::ApplyTo_Implementation(float BaseValue, float Value)
 {
 	// Perform no modification by default
-	return value;
+	return Value;
 }
 
 UBuff::~UBuff()

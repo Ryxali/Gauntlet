@@ -81,7 +81,7 @@ void UPerkManagerComponent::AddPerk(TSubclassOf<UPerk> Perk)
 	Perks.Add(p);
 }
 
-bool UPerkManagerComponent::hasPerk(TSubclassOf<UPerk> PerkType) const
+bool UPerkManagerComponent::HasPerk(TSubclassOf<UPerk> PerkType) const
 {
 	for (UPerk* Perk : Perks)
 	{

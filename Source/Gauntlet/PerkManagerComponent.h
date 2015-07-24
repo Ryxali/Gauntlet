@@ -41,6 +41,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void AddPerk(TSubclassOf<UPerk> Perk);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Combo")
+	bool hasPerk(TSubclassOf<UPerk> PerkType) const;
+
 	// Get the current combo count
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Combo")
 	int32 GetComboCount() const;

@@ -81,6 +81,15 @@ void UPerkManagerComponent::AddPerk(TSubclassOf<UPerk> Perk)
 	Perks.Add(p);
 }
 
+bool UPerkManagerComponent::hasPerk(TSubclassOf<UPerk> PerkType) const
+{
+	for (UPerk* Perk : Perks)
+	{
+		if (Perk->IsValidLowLevel() && Perk->GetClass() == PerkType) return true;
+	}
+	return false;
+}
+
 int32 UPerkManagerComponent::GetComboCount() const
 {
 	return InternalComboCount;

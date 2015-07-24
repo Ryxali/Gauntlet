@@ -6,6 +6,13 @@ class AActor;
 
 #include "Perk.generated.h"
 
+UENUM(BlueprintType)
+enum class EPerkOperationResult : uint8
+{
+	Success,
+	Failed
+};
+
 /**
  * 
  */
@@ -27,6 +34,9 @@ public:
 	virtual UWorld* GetWorld() const override;
 
 	void SetWorld(UWorld* World);
+
+	UFUNCTION(BlueprintCallable, Category = "Buff", Meta = (ExpandEnumAsExecs = "Branches"))
+	void AddBuffTo(AActor* Target, TSubclassOf<UBuff> Buff, EPerkOperationResult& Branches);
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Perk")
 	/** How much combo is required until this perk is applied */

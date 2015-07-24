@@ -75,6 +75,7 @@ void UPerkManagerComponent::ResetCombo()
 
 void UPerkManagerComponent::AddPerk(TSubclassOf<UPerk> Perk)
 {
+	if (Perk == NULL) return;
 	UPerk* p = NewObject<UPerk>((UObject*)GetTransientPackage(), Perk);
 	p->SetWorld(GetWorld());
 	Perks.Add(p);

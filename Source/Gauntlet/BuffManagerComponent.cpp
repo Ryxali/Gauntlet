@@ -49,6 +49,8 @@ void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 
 void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 {
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Adding Buff"));
+	if (Buff == NULL) return;
 	for (UBuff* Tmp : Buffs)
 	{
 		if (Tmp->GetClass() == Buff)
@@ -63,7 +65,6 @@ void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 			}
 		}
 	}
-
 	UBuff* p = NewObject<UBuff>((UObject*)GetTransientPackage(), Buff);
 	if (GetWorld()->IsValidLowLevel())
 	{ 

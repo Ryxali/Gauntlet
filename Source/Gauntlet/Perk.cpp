@@ -22,31 +22,19 @@ UPerk::UPerk(const class FPostConstructInitializeProperties& PCIP)
 	World = NULL;
 }
 
-/*void UPerk::SpawnActor()
-{
-	//GetWorld()->SpawnA
-}*/
-
-/*ULevel* UPerk::GetLevel() const
-{
-	return CastChecked<ULevel>(GetOuter());
-}*/
-
 void UPerk::SetWorld(UWorld* World)
 {
 	this->World = World;
 }
 
-UWorld* UPerk::GetWorld() const //
+UWorld* UPerk::GetWorld() const
 {
-	return World; // (!HasAnyFlags(RF_ClassDefaultObject) && !GetOuter()->HasAnyFlags(RF_BeginDestroyed | RF_Unreachable) ? GetLevel()->OwningWorld : NULL);
+	return World;
 }
 
 void UPerk::AddBuffTo(AActor* Target, TSubclassOf<UBuff> Buff, EPerkOperationResult& Branches)
 {
 	Branches = EPerkOperationResult::Failed;
-	//Target->GetComponents()
-	//LoadClass
 	UBuffManagerComponent* Temp = Cast<UBuffManagerComponent>(Target->FindComponentByClass(UBuffManagerComponent::StaticClass()));
 	if (Temp != NULL)
 	{

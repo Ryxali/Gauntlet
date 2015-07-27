@@ -40,7 +40,8 @@ public:
 	// Add a new perk, allowing it to be applied as the player progresses through combos
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void AddPerk(TSubclassOf<UPerk> Perk);
-
+	
+	// Checks whether this component currently has a perk of the given class type
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Combo")
 	bool HasPerk(TSubclassOf<UPerk> PerkType) const;
 

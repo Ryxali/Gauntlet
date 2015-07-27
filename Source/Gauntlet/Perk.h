@@ -27,14 +27,12 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Perk")
 	void Apply(AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player);
 
-	/*UFUNCTION(BlueprintCallable, Category = "Perk")
-	void SpawnActor(); //AActor* EnemyHit, AGameMode* GameMode, AGameState* GameState, ACharacter* Player
-	*/
-	//ULevel* GetLevel() const;
+	// Enables us to spawn actors
 	virtual UWorld* GetWorld() const override;
-
+	// Called from the manager to enable actor spawning
 	void SetWorld(UWorld* World);
 
+	// Attempt to add a buff to a target. The target must contain a BuffManagerComponent for this to be successful!
 	UFUNCTION(BlueprintCallable, Category = "Buff", Meta = (ExpandEnumAsExecs = "Branches"))
 	void AddBuffTo(AActor* Target, TSubclassOf<UBuff> Buff, EPerkOperationResult& Branches);
 

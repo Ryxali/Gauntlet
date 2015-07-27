@@ -30,7 +30,7 @@ void UBuffManagerComponent::BeginPlay()
 void UBuffManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-	for (auto It(Buffs.CreateIterator()); It; It++)
+	for (auto It(Buffs.CreateIterator()); It; It++) // Remove decayed buffs
 	{
 		if (!(*It)->IsValidLowLevel()) continue;
 		float SecondsPassed = UGameplayStatics::GetRealTimeSeconds(GetWorld());

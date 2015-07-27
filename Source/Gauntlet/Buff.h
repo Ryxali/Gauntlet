@@ -22,7 +22,7 @@ public:
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
 
 	/* 
-		Orders the buff to calculate it's end time, allowing any manager to know
+		Orders the buff to calculate it's end time, allowing its manager to know
 		when it should be destroyed.
 	*/
 	UFUNCTION()
@@ -32,6 +32,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	TArray<EBuffAppliesTo> AppliesTo;
 
+	// Compressed bitset form of AppliesTo
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Buff")
 	EBuffAppliesTo AppliesTo_Flags;
 
@@ -56,6 +57,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Buff")
 	float LifeTime;
 
+	// The time this Buff should be counted as decayed
 	UPROPERTY()
 	float EndTime;
 

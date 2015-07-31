@@ -59,7 +59,7 @@
     </object>
     <object class="EventMixerMaster" id="{6198caea-9956-4681-b7a9-eca714c0de9c}">
         <property name="volume">
-            <value>3</value>
+            <value>2</value>
         </property>
         <property name="name">
             <value>Master</value>
@@ -173,7 +173,7 @@
     </object>
     <object class="MixerSend" id="{6d18ecf3-9304-4c99-bb60-7e90ab1f8f02}">
         <property name="level">
-            <value>-12</value>
+            <value>-8</value>
         </property>
         <relationship name="return">
             <destination>{2348ce80-71bc-4101-9180-da74573c64e3}</destination>

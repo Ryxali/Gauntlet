@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.03.01">
+    <object class="AudioFile" id="{9a31c57f-caee-4ba1-92be-0bfffdb5017c}">
+        <property name="frequencyInKHz">
+            <value>44.1</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.25</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/EffectPlayerAttackVocalShort_05 {46395eca-8491-49a5-ac94-cf3255ef1715}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{00bb1fa6-e71b-4d36-99dc-9de7f1453b23}</destination>
+        </relationship>
+    </object>
+</objects>

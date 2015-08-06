@@ -238,3 +238,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Binaries/Win64/Gauntlet.exe
+Binaries/Win64/Gauntlet.exp
+Binaries/Win64/Gauntlet.lib

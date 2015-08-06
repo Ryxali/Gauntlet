@@ -15,7 +15,6 @@ UBuff::UBuff(const class FPostConstructInitializeProperties& PCIP)
 
 void UBuff::PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent)
 {
-	Super::PostEditChangeProperty(PropertyChangedEvent);
 	AppliesTo_Flags = EBuffAppliesTo::NONE;
 	for (auto It(AppliesTo.CreateIterator()); It; It++)
 	{

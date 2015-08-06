@@ -19,7 +19,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Buff")
 	float ApplyTo(float BaseValue, float Value);
 
-	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent) override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent);
 
 	/* 
 		Orders the buff to calculate it's end time, allowing its manager to know

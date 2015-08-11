@@ -33,9 +33,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void IncrementCombo(AActor* EnemyHit);
 
-	// Reset the combo counter to 0, resetting any perks in the process
+	// Reset the combo counter by the preset amount, most often used when the player is hit.
 	UFUNCTION(BlueprintCallable, Category = "Combo")
 	void ResetCombo();
+
+	// Reset the combo counter to 0, resetting any perks in the process
+	UFUNCTION(BlueprintCallable, Category = "Combo")
+	void HardResetCombo();
 
 	// Add a new perk, allowing it to be applied as the player progresses through combos
 	UFUNCTION(BlueprintCallable, Category = "Combo")
@@ -48,6 +52,12 @@ public:
 	// Get the current combo count
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Combo")
 	int32 GetComboCount() const;
+	// Amount of combo that should be lost on reset, can also be a percentile value (0-100)
+	UPROPERTY(EditDefaultsOnly, Category = "Combo")
+	int32 ComboLostOnReset;
+	// Should the ComboLostOnReset be considered a percentile loss?
+	UPROPERTY(EditDefaultsOnly, Category = "Combo")
+	bool AsPercent;
 
 private:
 	UPROPERTY()

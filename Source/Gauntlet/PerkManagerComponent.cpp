@@ -70,6 +70,18 @@ void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 
 void UPerkManagerComponent::ResetCombo()
 {
+	if (AsPercent) {
+		InternalComboCount *= (((float)ComboLostOnReset)/100.f);
+	}
+	else 
+	{
+		InternalComboCount -= ComboLostOnReset;
+	}
+	
+}
+
+void UPerkManagerComponent::HardResetCombo()
+{
 	InternalComboCount = 0;
 }
 

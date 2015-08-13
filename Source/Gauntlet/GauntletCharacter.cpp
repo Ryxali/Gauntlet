@@ -81,7 +81,7 @@ void AGauntletCharacter::Tick(float Delta)
 {
 	Super::Tick(Delta);
 
-	if (Controller != NULL)
+	if (Controller != NULL && bMouseRotationEnabled)
 	{
 		APlayerController* PlayerController = (APlayerController*) GetWorld()->GetFirstPlayerController();
 		

@@ -28,7 +28,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Input)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = "true"))
 		bool bMouseRotationEnabled;
 
 	void Tick(float Delta) override;

@@ -62,7 +62,7 @@
     </object>
     <object class="EventMixerMaster" id="{11b3cd0d-16f9-403e-b8db-cfd9a84c5d1b}">
         <property name="volume">
-            <value>-20.5</value>
+            <value>-30</value>
         </property>
         <property name="name">
             <value>Master</value>
@@ -121,6 +121,7 @@
             <destination>{88f4b01a-6c2e-49be-a697-89debc66edf6}</destination>
             <destination>{da63aa30-b0b5-4a0e-b8ea-2104eaf8b16c}</destination>
             <destination>{96263f53-25ca-4082-9559-0d74ce2ee889}</destination>
+            <destination>{35483bab-6258-4cfe-a1f2-83260c9dd2d2}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{10bf63ec-b428-4393-a82e-0fae313f09c7}"/>
@@ -145,6 +146,11 @@
             <destination>{2348ce80-71bc-4101-9180-da74573c64e3}</destination>
         </relationship>
     </object>
+    <object class="PluginEffect" id="{35483bab-6258-4cfe-a1f2-83260c9dd2d2}">
+        <relationship name="plugin">
+            <destination>{2fb403dc-3a9b-4c27-bb19-51b83855ba3d}</destination>
+        </relationship>
+    </object>
     <object class="MixerBusFader" id="{2f95d597-2db5-4891-8ebc-f96b94638870}"/>
     <object class="ThreeEQEffect" id="{b81afea5-9251-4ea8-9306-8b2768a9cb77}">
         <property name="lowGain">
@@ -155,6 +161,45 @@
         </property>
         <property name="highGain">
             <value>-25</value>
+        </property>
+    </object>
+    <object class="Plugin" id="{2fb403dc-3a9b-4c27-bb19-51b83855ba3d}">
+        <property name="identifier">
+            <value>FMOD Distortion</value>
+        </property>
+        <property name="uiName">
+            <value>Distortion</value>
+        </property>
+        <relationship name="pluginParameters">
+            <destination>{b53e3ef8-f5bb-48ac-b066-d98e86dd616b}</destination>
+        </relationship>
+    </object>
+    <object class="FloatPluginParameter" id="{b53e3ef8-f5bb-48ac-b066-d98e86dd616b}">
+        <property name="name">
+            <value>Level</value>
+        </property>
+        <property name="curve">
+            <value>LinearCurveStrategy{(0.000000,0.000000)(1.000000,1.000000)}</value>
+        </property>
+        <property name="defaultValue">
+            <value>0.5</value>
+        </property>
+        <property name="value">
+            <value>0.81</value>
+        </property>
+        <relationship name="automationScale">
+            <destination>{21886d49-81db-4d8c-9e7b-a7cb174ede12}</destination>
+        </relationship>
+    </object>
+    <object class="AutomationScale" id="{21886d49-81db-4d8c-9e7b-a7cb174ede12}">
+        <property name="curve">
+            <value>LinearCurveStrategy{(0.000000,0.000000)(1.000000,1.000000)}</value>
+        </property>
+        <property name="associatedClassName">
+            <value>FloatPluginParameter</value>
+        </property>
+        <property name="associatedPropertyName">
+            <value>Level</value>
         </property>
     </object>
 </objects>

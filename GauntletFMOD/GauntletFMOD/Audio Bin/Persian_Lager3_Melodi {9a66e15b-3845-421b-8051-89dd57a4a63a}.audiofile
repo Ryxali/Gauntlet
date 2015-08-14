@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.03.01">
+    <object class="AudioFile" id="{9a66e15b-3845-421b-8051-89dd57a4a63a}">
+        <property name="frequencyInKHz">
+            <value>44.1</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>133.953492063492</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/Persian_Lager3_Melodi {78c5dc3b-e7fc-46ed-9e3a-38e00b7c6e10}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{00bb1fa6-e71b-4d36-99dc-9de7f1453b23}</destination>
+        </relationship>
+    </object>
+</objects>

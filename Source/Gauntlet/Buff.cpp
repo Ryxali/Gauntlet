@@ -38,3 +38,13 @@ UBuff::~UBuff()
 {
 
 }
+
+void UBuff::SetWorld(UWorld* World)
+{
+	this->World = World;
+}
+
+UWorld* UBuff::GetWorld() const
+{
+	return World;
+}

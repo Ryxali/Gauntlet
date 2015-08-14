@@ -16,8 +16,16 @@ public:
 	UBuff();
 	~UBuff();
 
+	// Enables us to spawn actors
+	virtual UWorld* GetWorld() const override;
+	// Called from the manager to enable actor spawning
+	void SetWorld(UWorld* World);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Buff")
 	float ApplyTo(float BaseValue, float Value);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Buff")
+	void OnHit(AActor* HitActor);
 
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent & PropertyChangedEvent);
 
@@ -61,5 +69,9 @@ public:
 	UPROPERTY()
 	float EndTime;
 
-	
+	UPROPERTY(BlueprintReadOnly, Category = "Buff")
+	AActor* Host;
+
+private:
+	UWorld* World;
 };

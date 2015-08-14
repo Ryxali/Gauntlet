@@ -3,6 +3,7 @@
 #include "Gauntlet.h"
 #include "PerkManagerComponent.h"
 #include "Perk.h"
+#include "BuffManagerComponent.h"
 #include "Engine.h"
 // Sets default values for this component's properties
 UPerkManagerComponent::UPerkManagerComponent()
@@ -45,6 +46,15 @@ void UPerkManagerComponent::TickComponent( float DeltaTime, ELevelTick TickType,
 	// 
 }
 
+void NotifyHit(AActor* Target, AActor* EnemyHit)
+{
+	UBuffManagerComponent* Temp = Cast<UBuffManagerComponent>(Target->FindComponentByClass(UBuffManagerComponent::StaticClass()));
+	if (Temp != NULL)
+	{
+		Temp->OnHit(EnemyHit);
+	}
+}
+
 void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 {
 	InternalComboCount++;
@@ -62,9 +72,14 @@ void UPerkManagerComponent::IncrementCombo(AActor* EnemyHit)
 			&& ((*It)->ComboPeriod == 0 || FMath::Floor(FMath::Fmod(InternalComboCount, (*It)->ComboPeriod)) == 0)) // && (InternalComboCount % ((*It)->ComboPeriod))
 		{
 			(*It)->Apply(EnemyHit, UGameplayStatics::GetGameMode(this), UGameplayStatics::GetGameState(this), UGameplayStatics::GetPlayerCharacter(this, 0));
+
 		}
 
 	}
+	NotifyHit(EnemyHit, EnemyHit);
+	NotifyHit(UGameplayStatics::GetGameMode(this), EnemyHit);
+	NotifyHit(UGameplayStatics::GetGameState(this), EnemyHit);
+	NotifyHit(UGameplayStatics::GetPlayerCharacter(this, 0), EnemyHit);
 	
 }
 

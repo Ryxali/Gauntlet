@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void AddBuff(TSubclassOf<UBuff> Buff);
 
+	UFUNCTION(BlueprintCallable, Category = "Buff")
+	void OnHit(AActor* HitActor);
+
 	// Adds a new buffable value to this component
 	UFUNCTION(BlueprintCallable, Category = "Buff")
 	void AddValue(FName Name, float Value, const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags);

@@ -68,13 +68,26 @@ void UBuffManagerComponent::AddBuff(TSubclassOf<UBuff> Buff)
 	UBuff* p = NewObject<UBuff>((UObject*)GetTransientPackage(), Buff);
 	if (GetWorld()->IsValidLowLevel())
 	{ 
+		p->SetWorld(GetWorld());
 		p->StartDecay(UGameplayStatics::GetRealTimeSeconds(GetWorld()));
 	}
 	else
 	{
 		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("Cannot get world time for buff!"));
 	}
+	p->Host = GetOwner();
 	Buffs.Add(p);
+}
+
+void UBuffManagerComponent::OnHit(AActor* HitActor)
+{
+	for (UBuff* Tmp : Buffs)
+	{
+		if (Tmp->IsValidLowLevel())
+		{
+			Tmp->OnHit(HitActor);
+		}
+	}
 }
 
 void UBuffManagerComponent::AddValue(FName Name, float Value, const TArray<TEnumAsByte<EBuffAppliesTo>>& Flags)

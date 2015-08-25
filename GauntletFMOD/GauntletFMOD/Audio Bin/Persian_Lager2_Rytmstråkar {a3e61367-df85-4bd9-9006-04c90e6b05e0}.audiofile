@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.03.01">
+    <object class="AudioFile" id="{a3e61367-df85-4bd9-9006-04c90e6b05e0}">
+        <property name="frequencyInKHz">
+            <value>44.1</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>89.3001587301587</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/Persian_Lager2_Rytmstråkar {4a9ea423-b799-4660-8969-63d065dca7d9}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{00bb1fa6-e71b-4d36-99dc-9de7f1453b23}</destination>
+        </relationship>
+    </object>
+</objects>
